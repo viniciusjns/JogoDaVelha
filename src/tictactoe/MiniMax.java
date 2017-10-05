@@ -5,7 +5,11 @@ import java.util.ArrayList;
 public class MiniMax {
 
     private static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    private int tam, maxProf;
+    private int tam, maxProf, estadosPercorridos;
+
+    public int getEstadosPercorridos() {
+        return estadosPercorridos;
+    }
 
     public MiniMax(int tam, int maxProf) {
         this. tam = tam;
@@ -18,6 +22,7 @@ public class MiniMax {
 
     public int[][] decisao_minimax(int[][] tab) {
         sucessores.clear();
+        estadosPercorridos = 0;
 
         int v = valor_max(tab, true, 1);
 
@@ -30,6 +35,7 @@ public class MiniMax {
     }
 
     public int valor_max(int[][] tab, boolean prim, int prof) {
+        estadosPercorridos++;
         if (prof++ > maxProf || teste_terminal(tab)) {
             return utilidade(tab);
         }
@@ -48,6 +54,7 @@ public class MiniMax {
     }
 
     public int valor_min(int[][] tab, int prof) {
+        estadosPercorridos++;
         if (prof++ > maxProf || teste_terminal(tab))
             return utilidade(tab);
 
