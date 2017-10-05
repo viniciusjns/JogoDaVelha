@@ -403,20 +403,16 @@ public class JogoDaVelha extends JFrame implements ActionListener {
 
         for (int i = 0; i <= 7; i++) {
             if ((buttons[winCombinations[i][0]].getText().equals("X"))
-                    && (buttons[winCombinations[i][0]].getText()
-                    .equals(buttons[winCombinations[i][1]].getText()))
-                    && (buttons[winCombinations[i][1]].getText()
-                    .equals(buttons[winCombinations[i][2]].getText()))
+                    && (buttons[winCombinations[i][0]].getText().equals(buttons[winCombinations[i][1]].getText()))
+                    && (buttons[winCombinations[i][1]].getText().equals(buttons[winCombinations[i][2]].getText()))
                     && (!buttons[winCombinations[i][0]].getText().equals(""))) {
                 player = "X";
                 wins = true;
             }
 
             if ((!buttons[winCombinations[i][0]].getText().equals("O"))
-                    || (!buttons[winCombinations[i][0]].getText().equals(
-                    buttons[winCombinations[i][1]].getText()))
-                    || (!buttons[winCombinations[i][1]].getText().equals(
-                    buttons[winCombinations[i][2]].getText()))
+                    || (!buttons[winCombinations[i][0]].getText().equals(buttons[winCombinations[i][1]].getText()))
+                    || (!buttons[winCombinations[i][1]].getText().equals(buttons[winCombinations[i][2]].getText()))
                     || (buttons[winCombinations[i][0]].getText().equals(""))) {
                 continue;
             }
