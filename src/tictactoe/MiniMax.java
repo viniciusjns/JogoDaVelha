@@ -5,21 +5,21 @@ import java.util.ArrayList;
 public class MiniMax {
 
     private static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    private int tam, maxProf;
+    private int tam/*, maxProf*/;
 
-    public MiniMax(int tam, int maxProf) {
+    public MiniMax(int tam/*, int maxProf*/) {
         this. tam = tam;
-        if (maxProf > 0) {
+        /*if (maxProf > 0) {
             this.maxProf = maxProf;
         } else {
             this.maxProf = Integer.MAX_VALUE;
-        }
+        }*/
     }
 
     public int[][] decisao_minimax(int[][] tab) {
         sucessores.clear();
 
-        int v = valor_max(tab, true, 1);
+        int v = valor_max(tab, true/*, 1*/);
 
         for (Sucessor s : sucessores) {
             if (s.getUtilidade() == v)
@@ -29,15 +29,15 @@ public class MiniMax {
         return tab;
     }
 
-    public int valor_max(int[][] tab, boolean prim, int prof) {
-        if (prof++ > maxProf || teste_terminal(tab)) {
+    public int valor_max(int[][] tab, boolean prim/*, int prof*/) {
+        if (/*prof++ > maxProf || */teste_terminal(tab)) {
             return utilidade(tab);
         }
 
         int v = Integer.MIN_VALUE;
 
         for (Sucessor s : gerar_sucessores(tab, 1)) {
-            v = Math.max(v, valor_min(s.getTabuleiro(), prof));
+            v = Math.max(v, valor_min(s.getTabuleiro()/*, prof*/));
             s.setUtilidade(v);
 
             if (prim)
@@ -47,14 +47,14 @@ public class MiniMax {
         return v;
     }
 
-    public int valor_min(int[][] tab, int prof) {
-        if (prof++ > maxProf || teste_terminal(tab))
+    public int valor_min(int[][] tab/*, int prof*/) {
+        if (/*prof++ > maxProf ||*/ teste_terminal(tab))
             return utilidade(tab);
 
         int v = Integer.MAX_VALUE;
 
         for (Sucessor s : gerar_sucessores(tab, -1)) {
-            v = Math.min(v, valor_max(s.getTabuleiro(), false, prof));
+            v = Math.min(v, valor_max(s.getTabuleiro(), false/*, prof*/));
             s.setUtilidade(v);
         }
 

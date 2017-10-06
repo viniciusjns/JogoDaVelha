@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Velha {
 
     private static int TAM = 3;
-    private static int PROF = -1;
+    //private static int PROF = -1;
 
     public static void main(String[] args) {
         Scanner ent = new Scanner(System.in);
         Tabuleiro t = new Tabuleiro(TAM);
-        MiniMax mm = new MiniMax(TAM, PROF);
+        MiniMax mm = new MiniMax(TAM/*, PROF*/);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
         t.imprimir();
 
