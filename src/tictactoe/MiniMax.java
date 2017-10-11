@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class MiniMax {
 
     private static ArrayList<Sucessor> sucessores = new ArrayList<>();
-    private int tam, maxProf, estadosPercorridos;
+    private int tam;
+    private int maxProf;
+    private long estadosPercorridos;
 
-    public int getEstadosPercorridos() {
+    public long getEstadosPercorridos() {
         return estadosPercorridos;
     }
 

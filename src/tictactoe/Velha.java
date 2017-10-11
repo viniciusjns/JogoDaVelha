@@ -8,11 +8,12 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Velha extends JFrame implements ActionListener {
 
-    private static int TAM = 3;
+    private static int TAM = 4;
     private static int PROF = 0;
 
     private static JButton[] buttons = new JButton[10];
@@ -39,8 +40,10 @@ public class Velha extends JFrame implements ActionListener {
             t.imprimir();
 
             if (!mm.teste_terminal(t.getTabuleiro())) {
-                t.setTabuleiro(mm.decisao_minimax(t.getTabuleiro()));
                 System.out.println("Jogada do Computador:");
+                System.out.println("Data inicio: \t" + new Date());
+                t.setTabuleiro(mm.decisao_minimax(t.getTabuleiro()));
+                System.out.println("Data fim: \t\t" + new Date());
                 System.out.println("Estados percorridos: " + mm.getEstadosPercorridos());
                 t.imprimir();
             }
