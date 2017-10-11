@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Velha extends JFrame implements ActionListener {
 
     private static int TAM = 3;
-    private static int PROF = -1;
+    private static int PROF = 0;
 
     private static JButton[] buttons = new JButton[10];
     private static JPanel jPanelTabuleiro = null;
@@ -25,6 +25,7 @@ public class Velha extends JFrame implements ActionListener {
         Scanner ent = new Scanner(System.in);
         Tabuleiro t = new Tabuleiro(TAM);
         MiniMax mm = new MiniMax(TAM, PROF);
+//        MiniMaxAlfaBeta mm = new MiniMaxAlfaBeta(TAM, PROF);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
         t.imprimir();
 
