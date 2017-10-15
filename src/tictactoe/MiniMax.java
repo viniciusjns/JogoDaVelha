@@ -14,7 +14,7 @@ public class MiniMax {
     }
 
     public MiniMax(int tam, int maxProf) {
-        this. tam = tam;
+        this.tam = tam;
         if (maxProf > 0) {
             this.maxProf = maxProf;
         } else {
@@ -22,11 +22,11 @@ public class MiniMax {
         }
     }
 
-    public int[][] decisao_minimax(int[][] tab) {
+    public int[][] minimax(int[][] tab) {
         sucessores.clear();
         estadosPercorridos = 0;
 
-        int v = valor_max(tab, true, 1);
+        int v = max(tab, true, 1);
 
         for (Sucessor s : sucessores) {
             if (s.getUtilidade() == v)
@@ -36,16 +36,16 @@ public class MiniMax {
         return tab;
     }
 
-    public int valor_max(int[][] tab, boolean prim, int prof) {
+    public int max(int[][] tab, boolean prim, int prof) {
         estadosPercorridos++;
-        if (prof++ > maxProf || teste_terminal(tab)) {
+        if (/*prof++ > maxProf || */testeTermino(tab)) {
             return utilidade(tab);
         }
 
         int v = Integer.MIN_VALUE;
 
-        for (Sucessor s : gerar_sucessores(tab, 1)) {
-            v = Math.max(v, valor_min(s.getTabuleiro(), prof));
+        for (Sucessor s : gerarSucessores(tab, 1)) {
+            v = Math.max(v, min(s.getTabuleiro(), prof));
             s.setUtilidade(v);
 
             if (prim)
@@ -55,22 +55,22 @@ public class MiniMax {
         return v;
     }
 
-    public int valor_min(int[][] tab, int prof) {
+    public int min(int[][] tab, int prof) {
         estadosPercorridos++;
-        if (prof++ > maxProf || teste_terminal(tab))
+        if (/*prof++ > maxProf || */testeTermino(tab))
             return utilidade(tab);
 
         int v = Integer.MAX_VALUE;
 
-        for (Sucessor s : gerar_sucessores(tab, -1)) {
-            v = Math.min(v, valor_max(s.getTabuleiro(), false, prof));
+        for (Sucessor s : gerarSucessores(tab, -1)) {
+            v = Math.min(v, max(s.getTabuleiro(), false, prof));
             s.setUtilidade(v);
         }
 
         return v;
     }
 
-    public ArrayList<Sucessor> gerar_sucessores(int[][] tab, int v) {
+    public ArrayList<Sucessor> gerarSucessores(int[][] tab, int v) {
         ArrayList<Sucessor> suc = new ArrayList<>();
         for (int i = 0; i < tam; i++) {
             for (int j = 0; j < tam; j++) {
@@ -85,7 +85,7 @@ public class MiniMax {
         return suc;
     }
 
-    public boolean teste_terminal(int[][] tab) {
+    public boolean testeTermino(int[][] tab) {
         return (ganhou(tab, 1) || ganhou(tab, -1) || semEspaco(tab));
     }
 

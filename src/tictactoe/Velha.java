@@ -29,8 +29,15 @@ public class Velha extends JFrame implements ActionListener {
         t = new Tabuleiro(TAM);
         mm = new MiniMax(TAM, PROF);
 //        MiniMaxAlfaBeta mm = new MiniMaxAlfaBeta(TAM, PROF);
+        iniciaPorTerminal();
+//        iniciaPorGUI();
+    }
+
+    private static void iniciaPorTerminal() {
         Scanner ent = new Scanner(System.in);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
+        //int[][] tabuleiro = {{-1,0,1}, {1,0,0}, {-1,0,0}};
+        //t.setTabuleiro(tabuleiro);
         t.imprimir();
 
         do {
@@ -42,15 +49,15 @@ public class Velha extends JFrame implements ActionListener {
             t.fazerJogada(l - 1, c - 1);
             t.imprimir();
 
-            if (!mm.teste_terminal(t.getTabuleiro())) {
+            if (!mm.testeTermino(t.getTabuleiro())) {
                 System.out.println("Jogada do Computador:");
                 System.out.println("Data inicio: \t" + new Date());
-                t.setTabuleiro(mm.decisao_minimax(t.getTabuleiro()));
+                t.setTabuleiro(mm.minimax(t.getTabuleiro()));
                 System.out.println("Data fim: \t\t" + new Date());
                 System.out.println("Estados percorridos: " + mm.getEstadosPercorridos());
                 t.imprimir();
             }
-        } while (!mm.teste_terminal(t.getTabuleiro()));
+        } while (!mm.testeTermino(t.getTabuleiro()));
 
         if (mm.ganhou(t.getTabuleiro(), 1))
             System.out.println("O computador ganhou!");
@@ -58,15 +65,17 @@ public class Velha extends JFrame implements ActionListener {
             System.out.println("Você ganhou!");
         else
             System.out.println("Empate!");
+    }
 
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                Velha thisClass = new Velha();
-//                thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                thisClass.setVisible(true);
-//
-//            }
-//        });
+    private static void iniciaPorGUI() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Velha thisClass = new Velha();
+                thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                thisClass.setVisible(true);
+
+            }
+        });
     }
 
     @Override
@@ -87,7 +96,7 @@ public class Velha extends JFrame implements ActionListener {
                     new java.util.TimerTask() {
                         @Override
                         public void run() {
-                            t.setTabuleiro(mm.decisao_minimax(t.getTabuleiro()));
+                            t.setTabuleiro(mm.minimax(t.getTabuleiro()));
                             imprimirTabuleiro();
                             verificaVencedor();
                         }
@@ -99,7 +108,7 @@ public class Velha extends JFrame implements ActionListener {
     }
 
     private void verificaVencedor() {
-        if (mm.teste_terminal(t.getTabuleiro())) {
+        if (mm.testeTermino(t.getTabuleiro())) {
             int jogarNovamente = -1;
             if (mm.ganhou(t.getTabuleiro(), 1))
                 jogarNovamente = JOptionPane.showConfirmDialog(null, "O Computador ganhou! Jogar novamente?");
