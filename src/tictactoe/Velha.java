@@ -25,8 +25,8 @@ public class Velha extends JFrame implements ActionListener {
     public static void main(String[] args) {
         Scanner ent = new Scanner(System.in);
         Tabuleiro t = new Tabuleiro(TAM);
-        MiniMax mm = new MiniMax(TAM, PROF);
-//        MiniMaxAlfaBeta mm = new MiniMaxAlfaBeta(TAM, PROF);
+//        MiniMax mm = new MiniMax(TAM, PROF);
+        MiniMaxAlfaBeta mm = new MiniMaxAlfaBeta(TAM, PROF);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
         t.imprimir();
 
