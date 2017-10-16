@@ -38,7 +38,7 @@ public class MiniMax {
 
     public int max(int[][] tab, boolean prim, int prof) {
         estadosPercorridos++;
-        if (/*prof++ > maxProf || */testeTermino(tab)) {
+        if (prof++ > maxProf || testeTermino(tab)) {
             return utilidade(tab);
         }
 
@@ -57,7 +57,7 @@ public class MiniMax {
 
     public int min(int[][] tab, int prof) {
         estadosPercorridos++;
-        if (/*prof++ > maxProf || */testeTermino(tab))
+        if (prof++ > maxProf || testeTermino(tab))
             return utilidade(tab);
 
         int v = Integer.MAX_VALUE;

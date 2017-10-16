@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7820074b-3b32-4653-8c3b-0969aa3cb508" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/Velha$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/Velha$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/MiniMax.class" afterPath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/MiniMax.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/Tabuleiro.class" afterPath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/Tabuleiro.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/Velha.class" afterPath="$PROJECT_DIR$/out/production/JogoDaVelha/tictactoe/Velha.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tictactoe/MiniMax.java" afterPath="$PROJECT_DIR$/src/tictactoe/MiniMax.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tictactoe/MiniMaxAlfaBeta.java" afterPath="$PROJECT_DIR$/src/tictactoe/MiniMaxAlfaBeta.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tictactoe/Tabuleiro.java" afterPath="$PROJECT_DIR$/src/tictactoe/Tabuleiro.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tictactoe/Velha.java" afterPath="$PROJECT_DIR$/src/tictactoe/Velha.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +27,8 @@
       <file leaf-file-name="MiniMax.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tictactoe/MiniMax.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+            <state relative-caret-position="-135">
+              <caret line="59" column="32" lean-forward="false" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -44,7 +37,7 @@
       <file leaf-file-name="MiniMaxAlfaBeta.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tictactoe/MiniMaxAlfaBeta.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
+            <state relative-caret-position="180">
               <caret line="38" column="44" lean-forward="false" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
               <folding />
             </state>
@@ -54,8 +47,8 @@
       <file leaf-file-name="Velha.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tictactoe/Velha.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="109" column="4" lean-forward="true" selection-start-line="109" selection-start-column="4" selection-end-line="125" selection-end-column="5" />
+            <state relative-caret-position="-240">
+              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -114,9 +107,9 @@
         <option value="$PROJECT_DIR$/src/alphabetaprunning/VelhaAB.java" />
         <option value="$PROJECT_DIR$/src/alphabetaprunning/MinimaxAB.java" />
         <option value="$PROJECT_DIR$/src/tictactoe/Tabuleiro.java" />
-        <option value="$PROJECT_DIR$/src/tictactoe/MiniMax.java" />
         <option value="$PROJECT_DIR$/src/tictactoe/MiniMaxAlfaBeta.java" />
         <option value="$PROJECT_DIR$/src/tictactoe/Velha.java" />
+        <option value="$PROJECT_DIR$/src/tictactoe/MiniMax.java" />
       </list>
     </option>
   </component>
@@ -126,7 +119,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -361,7 +354,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="20" width="1346" height="704" extended-state="0" />
+    <frame x="10" y="20" width="1346" height="704" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -835,26 +828,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tictactoe/MiniMaxAlfaBeta.java">
+    <entry file="file://$PROJECT_DIR$/src/tictactoe/MiniMax.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="38" column="44" lean-forward="false" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+        <state relative-caret-position="-135">
+          <caret line="59" column="32" lean-forward="false" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tictactoe/MiniMax.java">
+    <entry file="file://$PROJECT_DIR$/src/tictactoe/MiniMaxAlfaBeta.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+        <state relative-caret-position="180">
+          <caret line="38" column="44" lean-forward="false" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tictactoe/Velha.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="109" column="4" lean-forward="true" selection-start-line="109" selection-start-column="4" selection-end-line="125" selection-end-column="5" />
+        <state relative-caret-position="-240">
+          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
           <folding />
         </state>
       </provider>
