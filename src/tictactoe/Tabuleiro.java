@@ -13,11 +13,12 @@ public class Tabuleiro {
         divisor = gerarDivisor();
     }
 
-    public void fazerJogada(int l, int c) {
-        if (tabuleiro[l][c] == 0)
+    public boolean fazerJogada(int l, int c) {
+        if (tabuleiro[l][c] == 0) {
             tabuleiro[l][c] = -1;
-        else
-            System.out.println("Posicao ja ocupada, perdeu a vez!");
+            return true;
+        }
+        return false;
     }
 
     public void imprimir() {

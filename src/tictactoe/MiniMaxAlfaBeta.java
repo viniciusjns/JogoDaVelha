@@ -20,11 +20,11 @@ public class MiniMaxAlfaBeta {
         }
     }
 
-    public int[][] decisao_minimax(int[][] tab) {
+    public int[][] minimax(int[][] tab) {
         sucessores.clear();
         estadosPercorridos = 0;
 
-        int v = valor_max(tab, true, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        int v = max(tab, true, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
 
         for (Sucessor s : sucessores) {
             if (s.getUtilidade() == v)
@@ -34,16 +34,16 @@ public class MiniMaxAlfaBeta {
         return tab;
     }
 
-    public int valor_max(int[][] tab, boolean prim, int prof, int alfa, int beta) {
+    public int max(int[][] tab, boolean prim, int prof, int alfa, int beta) {
         estadosPercorridos++;
-        if (prof++ > maxProf || teste_terminal(tab)) {
+        if (prof++ > maxProf || testeTermino(tab)) {
             return utilidade(tab);
         }
 
         int v = Integer.MIN_VALUE;
 
-        for (Sucessor s : gerar_sucessores(tab, 1)) {
-            v = Math.max(v, valor_min(s.getTabuleiro(), prof, alfa, beta));
+        for (Sucessor s : gerarSucessores(tab, 1)) {
+            v = Math.max(v, min(s.getTabuleiro(), prof, alfa, beta));
             s.setUtilidade(v);
 
             if (prim)
@@ -52,33 +52,33 @@ public class MiniMaxAlfaBeta {
             if (v >= beta)
                 return v;
 
-            alfa = Integer.max(v, alfa);
+            alfa = Math.max(v, alfa);
         }
 
         return v;
     }
 
-    public int valor_min(int[][] tab, int prof, int alfa, int beta) {
+    public int min(int[][] tab, int prof, int alfa, int beta) {
         estadosPercorridos++;
-        if (prof++ > maxProf || teste_terminal(tab))
+        if (prof++ > maxProf || testeTermino(tab))
             return utilidade(tab);
 
         int v = Integer.MAX_VALUE;
 
-        for (Sucessor s : gerar_sucessores(tab, -1)) {
-            v = Math.min(v, valor_max(s.getTabuleiro(), false, prof, alfa, beta));
+        for (Sucessor s : gerarSucessores(tab, -1)) {
+            v = Math.min(v, max(s.getTabuleiro(), false, prof, alfa, beta));
             s.setUtilidade(v);
 
             if (v <= alfa)
                 return v;
 
-            beta = Integer.min(v, beta);
+            beta = Math.min(v, beta);
         }
 
         return v;
     }
 
-    public ArrayList<Sucessor> gerar_sucessores(int[][] tab, int v) {
+    public ArrayList<Sucessor> gerarSucessores(int[][] tab, int v) {
         ArrayList<Sucessor> suc = new ArrayList<>();
         for (int i = 0; i < tam; i++) {
             for (int j = 0; j < tam; j++) {
@@ -93,7 +93,7 @@ public class MiniMaxAlfaBeta {
         return suc;
     }
 
-    public boolean teste_terminal(int[][] tab) {
+    public boolean testeTermino(int[][] tab) {
         return (ganhou(tab, 1) || ganhou(tab, -1) || semEspaco(tab));
     }
 

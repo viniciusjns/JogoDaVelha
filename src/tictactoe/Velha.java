@@ -1,6 +1,5 @@
 package tictactoe;
 
-import classes.JogoDaVelha;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -13,21 +12,32 @@ import java.util.Scanner;
 
 public class Velha extends JFrame implements ActionListener {
 
-    private static int TAM = 4;
+    private static int TAM = 3;
     private static int PROF = 0;
 
-    private static JButton[] buttons = new JButton[10];
+    private JButton[][] buttons = new JButton[TAM][TAM];
     private static JPanel jPanelTabuleiro = null;
     private JLabel jbtTitulo = null;
     private JLabel jlbSubTitulo = null;
     private JPanel jContentPane = null;
 
+    private static Tabuleiro t;
+    private static MiniMax mm;
+//    private static MiniMaxAlfaBeta mm;
+
     public static void main(String[] args) {
+        t = new Tabuleiro(TAM);
+        mm = new MiniMax(TAM, PROF);
+//        mm = new MiniMaxAlfaBeta(TAM, PROF);
+        iniciaPorTerminal();
+//        iniciaPorGUI();
+    }
+
+    private static void iniciaPorTerminal() {
         Scanner ent = new Scanner(System.in);
-        Tabuleiro t = new Tabuleiro(TAM);
-//        MiniMax mm = new MiniMax(TAM, PROF);
-        MiniMaxAlfaBeta mm = new MiniMaxAlfaBeta(TAM, PROF);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
+        //int[][] tabuleiro = {{-1,0,1}, {1,0,0}, {-1,0,0}};
+        //t.setTabuleiro(tabuleiro);
         t.imprimir();
 
         do {
@@ -39,15 +49,15 @@ public class Velha extends JFrame implements ActionListener {
             t.fazerJogada(l - 1, c - 1);
             t.imprimir();
 
-            if (!mm.teste_terminal(t.getTabuleiro())) {
+            if (!mm.testeTermino(t.getTabuleiro())) {
                 System.out.println("Jogada do Computador:");
                 System.out.println("Data inicio: \t" + new Date());
-                t.setTabuleiro(mm.decisao_minimax(t.getTabuleiro()));
+                t.setTabuleiro(mm.minimax(t.getTabuleiro()));
                 System.out.println("Data fim: \t\t" + new Date());
                 System.out.println("Estados percorridos: " + mm.getEstadosPercorridos());
                 t.imprimir();
             }
-        } while (!mm.teste_terminal(t.getTabuleiro()));
+        } while (!mm.testeTermino(t.getTabuleiro()));
 
         if (mm.ganhou(t.getTabuleiro(), 1))
             System.out.println("O computador ganhou!");
@@ -55,29 +65,90 @@ public class Velha extends JFrame implements ActionListener {
             System.out.println("Você ganhou!");
         else
             System.out.println("Empate!");
+    }
 
-        /*SwingUtilities.invokeLater(new Runnable() {
+    private static void iniciaPorGUI() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Velha thisClass = new Velha();
                 thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 thisClass.setVisible(true);
 
             }
-        });*/
+        });
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent a) {
+        JButton pressedButton = (JButton) a.getSource();
+
+        String[] split = pressedButton.getName().split(",");
+        int linha = Integer.parseInt(split[0]);
+        int coluna = Integer.parseInt(split[1]);
+
+        if (!t.fazerJogada(linha, coluna))
+            JOptionPane.showMessageDialog(null, "Posição já ocupada. Tente novamente.");
+        else {
+            imprimirTabuleiro();
+            verificaVencedor();
+
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            t.setTabuleiro(mm.minimax(t.getTabuleiro()));
+                            imprimirTabuleiro();
+                            verificaVencedor();
+                        }
+                    },
+                    500
+            );
+
+        }
+    }
+
+    private void verificaVencedor() {
+        if (mm.testeTermino(t.getTabuleiro())) {
+            int jogarNovamente = -1;
+            if (mm.ganhou(t.getTabuleiro(), 1))
+                jogarNovamente = JOptionPane.showConfirmDialog(null, "O Computador ganhou! Jogar novamente?");
+            else if (mm.ganhou(t.getTabuleiro(), -1))
+                jogarNovamente = JOptionPane.showConfirmDialog(null, "Você ganhou! Jogar novamente?");
+            else
+                jogarNovamente = JOptionPane.showConfirmDialog(null, "Empate. Jogar novamente?");
+
+            if (jogarNovamente == 0) {
+                novoJogo();
+            } else {
+                this.dispose();
+            }
+        }
+    }
+
+    private void novoJogo() {
+        for (int i = 0; i < TAM; i++) {
+            for (int j = 0; j < TAM; j++) {
+                buttons[i][j].setText("");
+                t.getTabuleiro()[i][j] = 0;
+            }
+        }
     }
 
     public Velha() {
         super();
         initialize();
 
-        for (int i = 1; i <= 9; i++) {
-            buttons[i] = new JButton();
-            buttons[i].setName(i + "");
-            buttons[i].setFont(new Font("Arial", Font.BOLD, 72));
-            buttons[i].setText("");
-            buttons[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
-            jPanelTabuleiro.add(buttons[i]);
-            buttons[i].addActionListener(this);
+        for (int i = 0; i < TAM; i++) {
+            for (int j = 0; j < TAM; j++) {
+                JButton button = new JButton();
+                button.setName(i + "," + j);
+                button.setFont(new Font("Arial", Font.BOLD, 72));
+                button.setText("");
+                button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                button.addActionListener(this);
+                buttons[i][j] = button;
+                jPanelTabuleiro.add(buttons[i][j]);
+            }
         }
     }
 
@@ -119,10 +190,11 @@ public class Velha extends JFrame implements ActionListener {
     private JPanel getJPanelTabuleiro() {
         if (jPanelTabuleiro == null) {
             jPanelTabuleiro = new JPanel();
+            jPanelTabuleiro.setBackground(Color.red);
             jPanelTabuleiro.setLayout(null);
             jPanelTabuleiro.setBounds(new Rectangle(167, 101, 500, 500));
 // jPanelTabuleiro.setPreferredSize(new Dimension(500, 500));
-            jPanelTabuleiro.setLayout(new GridLayout(3, 3));
+            jPanelTabuleiro.setLayout(new GridLayout(TAM, TAM));
             jPanelTabuleiro.setVisible(true);
             jPanelTabuleiro.setBorder(BorderFactory.createTitledBorder(
                     BorderFactory.createBevelBorder(BevelBorder.LOWERED),
@@ -133,15 +205,18 @@ public class Velha extends JFrame implements ActionListener {
         return jPanelTabuleiro;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent a) {
-        JButton pressedButton = (JButton) a.getSource();
-
-
-
-        if (pressedButton.getText().equals("")) {
-            pressedButton.setText(pressedButton.getName());
-            pressedButton.setForeground(Color.blue);
+    private void imprimirTabuleiro() {
+        for (int i = 0; i < TAM; i++) {
+            for (int j = 0; j < TAM; j++) {
+                if (t.getTabuleiro()[i][j] == -1) {
+                    buttons[i][j].setText("O");
+                    buttons[i][j].setForeground(Color.blue);
+                } else if (t.getTabuleiro()[i][j] == 1) {
+                    buttons[i][j].setText("X");
+                    buttons[i][j].setForeground(Color.red);
+                } else
+                    buttons[i][j].setText("");
+            }
         }
     }
 }
