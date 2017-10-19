@@ -36,28 +36,32 @@ public class Velha extends JFrame implements ActionListener {
     private static void iniciaPorTerminal() {
         Scanner ent = new Scanner(System.in);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
-        //int[][] tabuleiro = {{-1,0,1}, {1,0,0}, {-1,0,0}};
-        //t.setTabuleiro(tabuleiro);
+//        int[][] tabuleiro = {{-1,0,1}, {1,0,0}, {-1,0,0}};
+//        int[][] tabuleiro = {{-1,-1,-1}, {1,0,0}, {-1,0,0}};
+//        t.setTabuleiro(tabuleiro);
         t.imprimir();
 
-        do {
+        while (!mm.testeTermino(t.getTabuleiro())) {
             int l, c;
             System.out.printf("Sua jogada:\r\nLinha [1 - %d]: ", (TAM));
             l = ent.nextInt();
             System.out.printf("Coluna [1 - %d]: ", (TAM));
             c = ent.nextInt();
-            t.fazerJogada(l - 1, c - 1);
-            t.imprimir();
-
-            if (!mm.testeTermino(t.getTabuleiro())) {
-                System.out.println("Jogada do Computador:");
-                System.out.println("Data inicio: \t" + new Date());
-                t.setTabuleiro(mm.minimax(t.getTabuleiro()));
-                System.out.println("Data fim: \t\t" + new Date());
-                System.out.println("Estados percorridos: " + mm.getEstadosPercorridos());
+            if (!t.fazerJogada(l - 1, c - 1)) {
+                System.out.println("Posição já ocupada. Tente novamente.");
+            } else {
                 t.imprimir();
+
+                if (!mm.testeTermino(t.getTabuleiro())) {
+                    System.out.println("Jogada do Computador:");
+                    System.out.println("Data inicio: \t" + new Date());
+                    t.setTabuleiro(mm.minimax(t.getTabuleiro()));
+                    System.out.println("Data fim: \t\t" + new Date());
+                    System.out.println("Estados percorridos: " + mm.getEstadosPercorridos());
+                    t.imprimir();
+                }
             }
-        } while (!mm.testeTermino(t.getTabuleiro()));
+        }
 
         if (mm.ganhou(t.getTabuleiro(), 1))
             System.out.println("O computador ganhou!");
