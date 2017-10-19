@@ -15,11 +15,12 @@ public class Velha extends JFrame implements ActionListener {
     private static int TAM = 3;
     private static int PROF = 0;
 
-    private JButton[][] buttons = new JButton[TAM][TAM];
+    private static JButton[][] buttons = new JButton[TAM][TAM];
     private static JPanel jPanelTabuleiro = null;
     private JLabel jbtTitulo = null;
     private JLabel jlbSubTitulo = null;
     private JPanel jContentPane = null;
+    private static Velha thisClass;
 
     private static Tabuleiro t;
     private static MiniMax mm;
@@ -29,8 +30,8 @@ public class Velha extends JFrame implements ActionListener {
         t = new Tabuleiro(TAM);
         mm = new MiniMax(TAM, PROF);
 //        mm = new MiniMaxAlfaBeta(TAM, PROF);
-        iniciaPorTerminal();
-//        iniciaPorGUI();
+//        iniciaPorTerminal();
+        iniciaPorGUI();
     }
 
     private static void iniciaPorTerminal() {
@@ -74,10 +75,14 @@ public class Velha extends JFrame implements ActionListener {
     private static void iniciaPorGUI() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Velha thisClass = new Velha();
+                thisClass = new Velha();
                 thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 thisClass.setVisible(true);
-
+//                int[][] tabuleiro = {{-1, 0, 1}, {1, 0, 0}, {-1, 0, 0}};
+                int[][] tabuleiro = {{-1, -1, -1}, {1, 0, 0}, {-1, 0, 0}};
+                t.setTabuleiro(tabuleiro);
+                imprimirTabuleiro();
+                verificaVencedor();
             }
         });
     }
@@ -111,7 +116,7 @@ public class Velha extends JFrame implements ActionListener {
         }
     }
 
-    private void verificaVencedor() {
+    private static void verificaVencedor() {
         if (mm.testeTermino(t.getTabuleiro())) {
             int jogarNovamente = -1;
             if (mm.ganhou(t.getTabuleiro(), 1))
@@ -124,12 +129,12 @@ public class Velha extends JFrame implements ActionListener {
             if (jogarNovamente == 0) {
                 novoJogo();
             } else {
-                this.dispose();
+                thisClass.dispose();
             }
         }
     }
 
-    private void novoJogo() {
+    private static void novoJogo() {
         for (int i = 0; i < TAM; i++) {
             for (int j = 0; j < TAM; j++) {
                 buttons[i][j].setText("");
@@ -209,7 +214,7 @@ public class Velha extends JFrame implements ActionListener {
         return jPanelTabuleiro;
     }
 
-    private void imprimirTabuleiro() {
+    private static void imprimirTabuleiro() {
         for (int i = 0; i < TAM; i++) {
             for (int j = 0; j < TAM; j++) {
                 if (t.getTabuleiro()[i][j] == -1) {

@@ -1,6 +1,7 @@
 package tictactoe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MiniMaxAlfaBeta {
 
@@ -25,13 +26,20 @@ public class MiniMaxAlfaBeta {
         estadosPercorridos = 0;
 
         int v = max(tab, true, 1, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        List<Sucessor> list = new ArrayList<>();
 
         for (Sucessor s : sucessores) {
             if (s.getUtilidade() == v)
-                return s.getTabuleiro();
+                list.add(s);
         }
 
-        return tab;
+        for (Sucessor s : list) {
+            if (testeTermino(s.getTabuleiro())) {
+                return s.getTabuleiro();
+            }
+        }
+
+        return list.get(0) != null ? list.get(0).getTabuleiro() : tab;
     }
 
     public int max(int[][] tab, boolean prim, int prof, int alfa, int beta) {
