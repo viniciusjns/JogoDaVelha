@@ -101,7 +101,7 @@ public class Velha extends JFrame implements ActionListener {
                             verificaVencedor();
                         }
                     },
-                    500
+                    100
             );
 
         }
@@ -168,7 +168,7 @@ public class Velha extends JFrame implements ActionListener {
             jlbSubTitulo = new JLabel();
             jlbSubTitulo.setBounds(new Rectangle(89, 48, 643, 20));
             jlbSubTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-            jlbSubTitulo.setForeground(Color.red);
+//            jlbSubTitulo.setForeground(Color.red);
             jlbSubTitulo.setText("Humano vs Computador (MiniMax AI)");
 
             jbtTitulo = new JLabel();
@@ -190,7 +190,7 @@ public class Velha extends JFrame implements ActionListener {
     private JPanel getJPanelTabuleiro() {
         if (jPanelTabuleiro == null) {
             jPanelTabuleiro = new JPanel();
-            jPanelTabuleiro.setBackground(Color.red);
+//            jPanelTabuleiro.setBackground(Color.red);
             jPanelTabuleiro.setLayout(null);
             jPanelTabuleiro.setBounds(new Rectangle(167, 101, 500, 500));
 // jPanelTabuleiro.setPreferredSize(new Dimension(500, 500));
