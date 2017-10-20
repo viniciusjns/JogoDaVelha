@@ -30,16 +30,14 @@ public class Velha extends JFrame implements ActionListener {
         t = new Tabuleiro(TAM);
         mm = new MiniMax(TAM, PROF);
 //        mm = new MiniMaxAlfaBeta(TAM, PROF);
-//        iniciaPorTerminal();
-        iniciaPorGUI();
+        iniciaPorTerminal();
+//        iniciaPorGUI();
     }
 
     private static void iniciaPorTerminal() {
         Scanner ent = new Scanner(System.in);
         System.out.println("Bem vindo ao Jogo!\nBoa Sorte!\n\n");
-//        int[][] tabuleiro = {{-1,0,1}, {1,0,0}, {-1,0,0}};
-//        int[][] tabuleiro = {{-1,-1,-1}, {1,0,0}, {-1,0,0}};
-//        t.setTabuleiro(tabuleiro);
+        iniciarTabuleiro();
         t.imprimir();
 
         while (!mm.testeTermino(t.getTabuleiro())) {
@@ -78,13 +76,25 @@ public class Velha extends JFrame implements ActionListener {
                 thisClass = new Velha();
                 thisClass.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 thisClass.setVisible(true);
-//                int[][] tabuleiro = {{-1, 0, 1}, {1, 0, 0}, {-1, 0, 0}};
-                int[][] tabuleiro = {{-1, -1, -1}, {1, 0, 0}, {-1, 0, 0}};
-                t.setTabuleiro(tabuleiro);
+                iniciarTabuleiro();
                 imprimirTabuleiro();
                 verificaVencedor();
             }
         });
+    }
+
+    private static void iniciarTabuleiro() {
+//        int[][] tabuleiro = {
+//                {-1,0,1},
+//                {1,0,0},
+//                {-1,0,0}
+//        };
+        int[][] tabuleiro = {
+                {-1,-1,0},
+                {1,0,0},
+                {1,0,0}
+        };
+        t.setTabuleiro(tabuleiro);
     }
 
     @Override

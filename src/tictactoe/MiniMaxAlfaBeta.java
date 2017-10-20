@@ -39,13 +39,13 @@ public class MiniMaxAlfaBeta {
             }
         }
 
-        return list.get(0) != null ? list.get(0).getTabuleiro() : tab;
+        return !list.isEmpty() ? list.get(0).getTabuleiro() : tab;
     }
 
     public int max(int[][] tab, boolean prim, int prof, int alfa, int beta) {
         estadosPercorridos++;
         if (prof++ > maxProf || testeTermino(tab)) {
-            return utilidade(tab);
+            return utilidade(tab, prof);
         }
 
         int v = Integer.MIN_VALUE;
@@ -69,7 +69,7 @@ public class MiniMaxAlfaBeta {
     public int min(int[][] tab, int prof, int alfa, int beta) {
         estadosPercorridos++;
         if (prof++ > maxProf || testeTermino(tab))
-            return utilidade(tab);
+            return utilidade(tab, prof);
 
         int v = Integer.MAX_VALUE;
 
@@ -105,11 +105,11 @@ public class MiniMaxAlfaBeta {
         return (ganhou(tab, 1) || ganhou(tab, -1) || semEspaco(tab));
     }
 
-    public int utilidade(int[][] tab) {
+    public int utilidade(int[][] tab, int prof) {
         if (ganhou(tab, 1))
-            return 1;
+            return prof - 1;
         else if (ganhou(tab, -1))
-            return -1;
+            return 1 - prof;
         else
             return 0;
     }

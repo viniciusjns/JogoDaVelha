@@ -41,7 +41,7 @@ public class MiniMax {
             }
         }
 
-        return list.get(0) != null ? list.get(0).getTabuleiro() : tab;
+        return !list.isEmpty() ? list.get(0).getTabuleiro() : tab;
     }
 
     public int max(int[][] tab, boolean prim, int prof) {
